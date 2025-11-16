@@ -8,6 +8,9 @@ const logger = createLogger('utils')
  * @returns a user id from the JWT token
  */
 export function parseUserId(jwtToken) {
+  if (jwtToken.startsWith("Bearer ")) {
+    jwtToken = jwtToken.substring(7)
+  }
   const decodedJwt = decode(jwtToken)
   return decodedJwt.sub
 }
