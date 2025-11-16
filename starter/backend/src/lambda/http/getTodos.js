@@ -1,5 +1,3 @@
-
-
 import { getTodosForUser } from '../../businessLogic/todos.mjs'
 import { parseUserId } from '../../auth/utils.mjs'
 import { createLogger } from '../../utils/logger.mjs'

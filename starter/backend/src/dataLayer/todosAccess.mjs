@@ -1,8 +1,11 @@
 // Data access layer for TODOs (DynamoDB)
 import { DynamoDBClient, QueryCommand, PutItemCommand, UpdateItemCommand, DeleteItemCommand } from '@aws-sdk/client-dynamodb'
 import { v4 as uuidv4 } from 'uuid'
+import AWSXRay from 'aws-xray-sdk'
 
-const client = new DynamoDBClient()
+const client = AWSXRay.captureAWSv3Client(
+  new DynamoDBClient({ region: "us-east-1" })
+)
 const TODOS_TABLE = "TodosTable"
 
 export async function getAllTodos(userId) {

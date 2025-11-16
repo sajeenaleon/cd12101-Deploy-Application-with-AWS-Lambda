@@ -14,6 +14,10 @@ provider:
     TODOS_TABLE: TodosTable
     TODOS_S3_BUCKET: todos-bucket-sajileon-20251115
 
+  tracing:
+    lambda: true
+    apiGateway: true
+
 functions:
 
   Auth:
@@ -51,6 +55,9 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+          request:
+            schemas:
+              application/json: ${file(models/create-todo-request.json)}
 
 
   UpdateTodo:

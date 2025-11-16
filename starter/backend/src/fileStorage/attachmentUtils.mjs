@@ -1,8 +1,12 @@
 // File storage utility for S3 presigned URLs
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import AWSXRay from 'aws-xray-sdk'
 
-const s3 = new S3Client()
+const s3 = AWSXRay.captureAWSv3Client(
+  new S3Client({ region: "us-east-1" })
+)
+
 const BUCKET = process.env.TODOS_S3_BUCKET
 const URL_EXPIRATION = 300 // seconds
 
